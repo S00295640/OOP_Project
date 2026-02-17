@@ -1,0 +1,100 @@
+﻿<Window x:Class="MCSR_Ranked_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MCSR Ranked Hub" Height="700" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        Background="#081818">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="TextGreen" Color="#99FF66" />
+        <SolidColorBrush x:Key="TitleBg" Color="#122B27" />
+        
+        <Style x:Key="LargeMenuButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#122B27"/>
+            <Setter Property="Foreground" Value="{StaticResource TextGreen}"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="./Resources/#Minecrafter"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="Padding" Value="30,25"/> <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="White" 
+                                BorderThickness="4" 
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1A443E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <DrawingBrush TileMode="Tile" Viewport="0,0,200,200" ViewportUnits="Absolute">
+                <DrawingBrush.Drawing>
+                    <DrawingGroup>
+                        <GeometryDrawing Brush="#081818">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0,0,200,200" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#0A2222">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="100,0,100,100" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#051212">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0,100,100,100" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingGroup>
+                </DrawingBrush.Drawing>
+            </DrawingBrush>
+        </Grid.Background>
+
+        <Rectangle Opacity="0.1">
+            <Rectangle.Fill>
+                <VisualBrush TileMode="Tile" Viewport="0,0,40,40" ViewportUnits="Absolute">
+                    <VisualBrush.Visual>
+                        <Rectangle Width="40" Height="40" Stroke="White" StrokeThickness="0.5"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <StackPanel Margin="60,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            
+            <Border BorderBrush="White" BorderThickness="5" Background="{StaticResource TitleBg}" Padding="20,20" Margin="0,0,0,60">
+                <StackPanel>
+                    <TextBlock Text="MINECRAFT" 
+                               Foreground="{StaticResource TextGreen}" 
+                               FontSize="54" FontWeight="Black" FontFamily="./Resources/#Minecrafter"/>
+                    <TextBlock Text="SPEEDRUNNING" 
+                               Foreground="{StaticResource TextGreen}" 
+                               FontSize="54" FontWeight="Black" FontFamily="./Resources/#Minecrafter" Margin="0,-10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <Button Content="GUIDES" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
+            <Button Content="FIND RESOURCES" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
+            <Button Content="POST NEW RESOURCE" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
+
+
+        </StackPanel>
+    </Grid>
+</Window>

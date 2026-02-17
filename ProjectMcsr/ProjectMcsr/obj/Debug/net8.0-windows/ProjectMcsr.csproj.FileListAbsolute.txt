@@ -1,0 +1,9 @@
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\MainWindow.baml
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\App.g.cs
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr_MarkupCompile.cache
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.g.resources
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.GeneratedMSBuildEditorConfig.editorconfig
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.AssemblyInfoInputs.cache
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.AssemblyInfo.cs
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.csproj.CoreCompileInputs.cache
