@@ -15,6 +15,10 @@
     <ItemGroup>
       <None Remove="Resources\Minecraftia-Regular.ttf" />
       <Resource Include="Resources\Minecraftia.ttf" />
+      <None Remove="Resources\Minecrafter.Reg.ttf" />
+      <Resource Include="Resources\Minecrafter.Reg.ttf" />
+      <None Remove="Resources\Minecrafter.Alt.ttf" />
+      <Resource Include="Resources\Minecrafter.Alt.ttf" />
     </ItemGroup>
 
 </Project>

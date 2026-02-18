@@ -7,3 +7,14 @@ D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\Pro
 D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.AssemblyInfoInputs.cache
 D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.AssemblyInfo.cs
 D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.csproj.CoreCompileInputs.cache
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.sourcelink.json
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\bin\Debug\net8.0-windows\ProjectMcsr.exe
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\bin\Debug\net8.0-windows\ProjectMcsr.deps.json
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\bin\Debug\net8.0-windows\ProjectMcsr.runtimeconfig.json
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\bin\Debug\net8.0-windows\ProjectMcsr.dll
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.dll
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\refint\ProjectMcsr.dll
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.pdb
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ProjectMcsr.genruntimeconfig.cache
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\obj\Debug\net8.0-windows\ref\ProjectMcsr.dll
+D:\XAML_Project\OOP_Project\ProjectMcsr\ProjectMcsr\bin\Debug\net8.0-windows\ProjectMcsr.pdb

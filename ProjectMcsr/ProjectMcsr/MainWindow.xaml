@@ -1,4 +1,4 @@
-﻿<Window x:Class="MCSR_Ranked_App.MainWindow"
+﻿<Window x:Class="ProjectMcsr.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MCSR Ranked Hub" Height="700" Width="1100"
@@ -13,7 +13,7 @@
             <Setter Property="Background" Value="#122B27"/>
             <Setter Property="Foreground" Value="{StaticResource TextGreen}"/>
             <Setter Property="FontSize" Value="24"/>
-            <Setter Property="FontFamily" Value="./Resources/#Minecrafter"/>
+            <Setter Property="FontFamily" Value="/ProjectMcsr;component/Resources/#Minecrafter"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
@@ -77,24 +77,62 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <StackPanel Margin="60,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel x:Name="MainMenuPanel" Margin="60,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             
+           
+                <Border BorderBrush="White" BorderThickness="5" Background="{StaticResource TitleBg}" Padding="20,20" Margin="0,0,0,60">
+                    <StackPanel>
+                        <TextBlock Text="MINECRAFT" 
+                                           Foreground="{StaticResource TextGreen}" 
+                                           FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                        <TextBlock Text="SPEEDRUNNING" 
+                               Foreground="{StaticResource TextGreen}" 
+                               FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" Margin="0,-10,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <ContentControl x:Name="PagePresenter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,50,0,0">
+                    <ContentControl.RenderTransform>
+                        <TranslateTransform x:Name="PageTransform" X="1000"/> </ContentControl.RenderTransform>
+                </ContentControl>
+            
+
+            
+                <Button Content="GUIDES" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnGuides_Click" />
+                <Button Content="FIND RESOURCES" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
+                <Button Content="POST NEW RESOURCE" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
+
+            
+            
+            
+        </StackPanel>
+        
+        
+        <StackPanel x:Name="GuidePanel" Margin="60,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel.RenderTransform>
+                <TranslateTransform x:Name="GuidesTransform" X="2000" />
+            </StackPanel.RenderTransform>
             <Border BorderBrush="White" BorderThickness="5" Background="{StaticResource TitleBg}" Padding="20,20" Margin="0,0,0,60">
                 <StackPanel>
                     <TextBlock Text="MINECRAFT" 
                                Foreground="{StaticResource TextGreen}" 
-                               FontSize="54" FontWeight="Black" FontFamily="./Resources/#Minecrafter"/>
+                               FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
                     <TextBlock Text="SPEEDRUNNING" 
                                Foreground="{StaticResource TextGreen}" 
-                               FontSize="54" FontWeight="Black" FontFamily="./Resources/#Minecrafter" Margin="0,-10,0,0"/>
+                               FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" Margin="0,-10,0,0"/>
                 </StackPanel>
             </Border>
 
-            <Button Content="GUIDES" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
-            <Button Content="FIND RESOURCES" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
-            <Button Content="POST NEW RESOURCE" Style="{StaticResource LargeMenuButtonStyle}" Width="550"/>
-
-
+            <ContentControl x:Name="MainMenuPresenter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,50,0,0">
+                <ContentControl.RenderTransform>
+                    <TranslateTransform x:Name="MainMenuTransform" X="1000"/> </ContentControl.RenderTransform>
+            </ContentControl>
+            
+            <Button Content="This is the guide part" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnGuides_Click" />
+            <Button Content="RETOUR" Click="BtnBack_Click" Style="{StaticResource LargeMenuButtonStyle}"/>
         </StackPanel>
+        
+        
+        
     </Grid>
 </Window>
