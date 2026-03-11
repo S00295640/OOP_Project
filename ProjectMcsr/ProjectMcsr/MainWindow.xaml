@@ -130,8 +130,61 @@
             </ContentControl>
             
             <Button Content="This is the guide part" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnGuides_Click" />
-            <Button Content="RETOUR" Style="{StaticResource LargeMenuButtonStyle}" Click="BtnBack_Click"/>
+            <Button Content="BACK" Style="{StaticResource LargeMenuButtonStyle}" Click="BtnBack_Click"/>
         </StackPanel>
+        
+        
+        
+        <StackPanel x:Name="FindResourcesPanel" Visibility="Visible" Margin="60,250,50,0">
+            <StackPanel.RenderTransform>
+                <TranslateTransform x:Name="FindResourcesTransform" X="4000" />
+            </StackPanel.RenderTransform>
+
+            <Border BorderBrush="White" BorderThickness="4" Background="{StaticResource TitleBg}" Padding="20" Margin="0,0,0,30">
+                <StackPanel>
+                    <TextBlock Text="FIND RESOURCES" FontSize="36" Foreground="{StaticResource TextGreen}" FontWeight="Bold" Margin="0,0,0,15" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="SearchBox" Height="40" Background="#051212" Foreground="{StaticResource TextGreen}" 
+                                 BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" 
+                                 Padding="10,0" FontSize="18" CaretBrush="White" Tag="Search for a guide or tool..." FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
+                
+                            <Button Grid.Column="1" Content="SEARCH" Width="120" Height="40" Margin="10,0,0,0"
+                        Style="{StaticResource LargeMenuButtonStyle}" FontSize="14"/>
+                        </Grid>
+                </StackPanel>
+            </Border>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
+                <ItemsControl x:Name="ResourcesList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+            
+                    <Border Width="250" Height="180" BorderBrush="White" BorderThickness="2" Margin="0,0,20,20" Background="#252525">
+                        <Grid>
+                            <TextBlock Text="Video Thumbnail Here" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#555" />
+                            <StackPanel VerticalAlignment="Bottom" Background="#AA000000" >
+                                <TextBlock Text="RSG 1.16.1 Guide" FontWeight="Bold" />
+                                <TextBlock Text="By SpecNR" FontSize="10" Foreground="#CCC" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+            
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Button Content="BACK" HorizontalAlignment="Left" Width="200" Margin="0,20,0,0"
+            Style="{StaticResource LargeMenuButtonStyle}" Click="BtnBackFromFind_Click"/>
+</StackPanel>
+        
+        
+        
         
         
         

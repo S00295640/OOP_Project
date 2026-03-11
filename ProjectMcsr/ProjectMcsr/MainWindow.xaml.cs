@@ -82,10 +82,39 @@ public partial class MainWindow : Window
 
     private void BtnFindResources_Click(object sender, RoutedEventArgs e)
     {
+        //Define animation
+        DoubleAnimation slideOut = new DoubleAnimation()
+        {
+            From = 0,
+            To = -1000,
+            Duration = TimeSpan.FromSeconds(0.5),
+            AccelerationRatio = 0.5
+        };
+        DoubleAnimation slideIn = new DoubleAnimation()
+        {
+            From = 4000,
+            To = 0,
+            Duration = TimeSpan.FromSeconds(0.8),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+        };
         
+        //Slide Out
+        TranslateTransform menuTransform = new TranslateTransform();
+        MainMenuPanel.RenderTransform = menuTransform;
+        menuTransform.BeginAnimation(TranslateTransform.XProperty, slideOut);
+        
+        //Slide In
+        TranslateTransform findTransform = new TranslateTransform();
+        FindResourcesPanel.RenderTransform = findTransform;
+        findTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
     }
 
     private void BtnPostResource_Click(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void BtnBackFromFind_Click(object sender, RoutedEventArgs e)
     {
         
     }
