@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,26 +24,69 @@ public partial class MainWindow : Window
     }
     private void BtnGuides_Click(object sender, RoutedEventArgs e)
     {
+        //Define animation
         DoubleAnimation slideOut = new DoubleAnimation()
         {
+            From = 0,
             To = -1000,
             Duration = TimeSpan.FromSeconds(0.5),
             AccelerationRatio = 0.5
         };
+        DoubleAnimation slideIn = new DoubleAnimation()
+        {
+            From = 4000,
+            To = 0,
+            Duration = TimeSpan.FromSeconds(0.8),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+        };
+        
+        //Slide Out
         TranslateTransform menuTransform = new TranslateTransform();
         MainMenuPanel.RenderTransform = menuTransform;
         menuTransform.BeginAnimation(TranslateTransform.XProperty, slideOut);
-
-        GuidePanel.Visibility = Visibility.Visible;
-        TimeSpan duration = TimeSpan.FromSeconds(0.8);
-        IEasingFunction ease = new CubicEase { EasingMode = EasingMode.EaseOut };
         
-        DoubleAnimation slideIn = new DoubleAnimation(1000, 0, duration) { EasingFunction = ease };
-        GuidesTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
+        //Slide In
+        TranslateTransform guideTransform = new TranslateTransform();
+        GuidePanel.RenderTransform = guideTransform;
+        guideTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
     }
 
     private void BtnBack_Click(object sender, RoutedEventArgs e)
     {
-        //routine pour close le panel
+        //Define animation
+        DoubleAnimation slideOut = new DoubleAnimation()
+        {
+            From = 0,
+            To = 4000,
+            Duration = TimeSpan.FromSeconds(0.5),
+            AccelerationRatio = 0.5
+        };
+        DoubleAnimation slideIn = new DoubleAnimation()
+        {
+            From = -1000,
+            To = 0,
+            Duration = TimeSpan.FromSeconds(0.8),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+        };
+        
+        //Slide Out
+        TranslateTransform backTransform = new TranslateTransform();
+        GuidePanel.RenderTransform = backTransform;
+        backTransform.BeginAnimation(TranslateTransform.XProperty, slideOut);
+        
+        //Slide In
+        TranslateTransform menuTransform = new TranslateTransform();
+        MainMenuPanel.RenderTransform = menuTransform;
+        menuTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
+    }
+
+    private void BtnFindResources_Click(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void BtnPostResource_Click(object sender, RoutedEventArgs e)
+    {
+        
     }
 }
