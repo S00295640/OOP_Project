@@ -1,0 +1,28 @@
+﻿1/Remplacer les étoiles de difficulté par des coeur minecraft hardcore pour le difficulté harcore
+2/gerer la suppression de resources de sa biblioteque
+3/Ajouter un systeme de note
+4/Ajouter Date ou est posté tuto
+5/Ajouter un bouton pour choisir comment doivent etre triés les jeux (Note/nom/auteur/date...)
+6/ajouter un onglet arrivant a droite donnant
+    A/lien clickable vers video
+    B/description
+    C/Note
+    D/Image du tuto
+    E/Auteur
+    F/Date
+7/changer le format des cartes pour que la partie difficulté puisse etre remplacer par une partie date/Auteur en fonction du tri activé
+8/Ajouter une erreur lors de l ajout d une ressource si les champs ne sont pas bien renseignés
+9/Ajouter la possibilité de ne pas mettre de vidéo.
+10/Ajouter un moyen d'ajouter une image personnaliser au tuto
+
+
+//Très très long truc a faire
+
+
+Onglet recherche
+Onglet Guide
+
+???
+
+Online
+System d'auteur
