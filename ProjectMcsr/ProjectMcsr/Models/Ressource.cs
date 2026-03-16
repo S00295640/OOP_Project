@@ -14,6 +14,14 @@ public class Ressource
     public string? image { get; set; }
     public string? idVideo { get; set; }
     public Split? split { get; set; }
+    
+    //Should add the Date of the parution of the tutorial
+    public string Date { get; set; }
+
+    //Maybe adding Some tags Later
+    //A Tag class is Created but is useless for the moment
+    //Think about it later during the "Search For Resources" part
+    /* public List<Tag>? tags { get; set; }*/
 
     public string iconPath
     {
@@ -47,6 +55,11 @@ public class Ressource
                 _ => "☆" // (default hopefully never in this case if nothing broken)
             };
         }
+    }
+    
+    public Ressource() 
+    {
+        //For the json save ?
     }
     
     public Ressource(string author, string name,ResourceType? type,Difficulty? difficulty,string description,string? image,string? videoLink,Split? split)

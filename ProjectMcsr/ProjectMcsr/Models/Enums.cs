@@ -27,6 +27,15 @@ public enum Difficulty
     Peaceful,
 }
 
+public enum SortBy
+{
+    Difficulty,
+    Name,
+    Type,
+    Split,
+    Date,
+}
+
 public static class EnumTools
 {
     public static Split? StringToSplit(string type)

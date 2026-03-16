@@ -25,13 +25,15 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Initialize();
+        MyResourceHandler handler = Initialize();
+        this.Closing += (s, e) => handler.SaveResources();
     }
 
-    private void Initialize()
+    private MyResourceHandler Initialize()
     {
         MyResources = new MyResourceHandler();
         MyResourcesList.ItemsSource = MyResources.Resources;
+        return MyResources;
     }
 
     private void BtnGuides_Click(object sender, RoutedEventArgs e)
@@ -330,5 +332,6 @@ public partial class MainWindow : Window
         MyResources.AddResource(resource);
         MyResourcesList.ItemsSource = null; 
         MyResourcesList.ItemsSource = MyResources.Resources;
+        MyResources.SaveResources();
     }
 }
