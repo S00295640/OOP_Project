@@ -1,0 +1,13 @@
+﻿                                            <Border Background="#051212" Height="36">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding EtoilesDifficulte }" 
+                                                               Foreground="#FFD700" 
+                                                               FontSize="20" 
+                                                               FontFamily="Segoe UI Symbol"/>
+ 
+                                                </StackPanel>
+                                            </Border>
+                                            
+                                            
+                                            Old code for difficulty stars keep the same for grades 
+                                           

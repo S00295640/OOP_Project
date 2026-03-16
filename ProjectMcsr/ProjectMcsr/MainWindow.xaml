@@ -240,16 +240,32 @@
                                                            FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
                                             </Border>
                                             
-                                            <Border Background="#051212" Height="36">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding EtoilesDifficulte }" 
-                                                               Foreground="#FFD700" 
-                                                               FontSize="20" 
-                                                               FontFamily="Segoe UI Symbol"/>
- 
-                                                </StackPanel>
-                                            </Border>
                                             
+                                            <Border Background="#051212" Height="36">
+                                                <ItemsControl ItemsSource="{Binding Path=DiffNumber}" 
+                                                              HorizontalAlignment="Center" 
+                                                              VerticalAlignment="Center">
+        
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <StackPanel Orientation="Horizontal"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Image Source="/Assets/heart_minecraft.png" 
+                                                                   Width="20" Height="20" 
+                                                                   Margin="2,0"
+                                                                   RenderOptions.BitmapScalingMode="NearestNeighbor">
+                                                                <Image.Effect>
+                                                                    <DropShadowEffect BlurRadius="0" ShadowDepth="2" Direction="315" Color="Black" Opacity="0.8"/>
+                                                                </Image.Effect>
+                                                            </Image>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </Border>
                                             
                                         </StackPanel>
                                         

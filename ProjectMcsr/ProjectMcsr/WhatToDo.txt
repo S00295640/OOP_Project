@@ -1,5 +1,4 @@
-﻿1/Remplacer les étoiles de difficulté par des coeur minecraft hardcore pour le difficulté harcore
-2/gerer la suppression de resources de sa biblioteque
+﻿2/gerer la suppression de resources de sa biblioteque
 3/Ajouter un systeme de note
 4/Ajouter Date ou est posté tuto
 5/Ajouter un bouton pour choisir comment doivent etre triés les jeux (Note/nom/auteur/date...)

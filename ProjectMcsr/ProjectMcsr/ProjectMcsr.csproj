@@ -33,6 +33,8 @@
       <Resource Include="Assets\Overworld.png" />
       <None Remove="Assets\Stronghold.png" />
       <Resource Include="Assets\Stronghold.png" />
+      <None Remove="Assets\heart_minecraft.png" />
+      <Resource Include="Assets\heart_minecraft.png" />
     </ItemGroup>
 
 </Project>

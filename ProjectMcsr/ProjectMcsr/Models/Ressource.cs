@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectMcsr.Models;
 
@@ -41,6 +42,24 @@ public class Ressource
         }
     }
 
+    
+    public IEnumerable DiffNumber
+    {
+        get
+        {
+            int count =  difficulty switch
+            {
+                Difficulty.Peaceful =>1,
+                Difficulty.Easy => 2,
+                Difficulty.Normal =>3,
+                Difficulty.Hard => 4,
+                Difficulty.Hardcore => 5,
+                _ =>0 // (default hopefully never in this case if nothing broken)
+            };
+            return Enumerable.Range(0, count);
+        }
+    }
+    
     public string EtoilesDifficulte
     {
         get
