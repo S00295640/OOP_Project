@@ -316,7 +316,18 @@ public partial class MainWindow : Window
         string description = InputDescription.Text;
         Split? split = EnumTools.StringToSplit(InputSplit.Text);
         string videoLink = InputVideoLink.Text;
-        MyResources.AddResource(new Ressource(author, name, type, difficulty, description,null, videoLink,split));
+        Ressource? resource = null;
+        try
+        {
+            resource = new Ressource(author, name, type, difficulty, description, null, videoLink, split);
+        }
+        catch (Exception exception)
+        {
+            //afficher erreur !
+        }
+        
+        
+        MyResources.AddResource(resource);
         MyResourcesList.ItemsSource = null; 
         MyResourcesList.ItemsSource = MyResources.Resources;
     }

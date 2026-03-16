@@ -34,13 +34,13 @@ public static class EnumTools
         type = type.ToLower();
         if (type == "overworld")
             return Split.Overworld;
-        if (type == "enternether")
+        if (type == "nether")
             return Split.EnterNether;
         if (type == "bastion")
             return Split.Bastion;
         if (type == "fortress")
             return Split.Fortress;
-        if (type == "blind")
+        if (type == "blind travel")
             return Split.Blind;
         if (type == "stronghold")
             return Split.Stronghold;

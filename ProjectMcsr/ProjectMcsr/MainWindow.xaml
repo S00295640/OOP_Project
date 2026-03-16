@@ -220,15 +220,53 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Width="250" Height="150" BorderBrush="White" BorderThickness="2" Margin="0,0,20,20" Background="#1A443E">
+                                <Border Width="250" Height="180" BorderBrush="White" BorderThickness="2" Margin="0,0,20,20" Background="#1A443E">
                                     <Grid>
+                                        
                                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding }" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="1.16.1 RSG" Foreground="{StaticResource TextGreen}" HorizontalAlignment="Center" FontSize="12"/>
+                                            
+                                            <Grid Height="110" Width="250">
+                                                <Image Source="{Binding idVideo }" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Height="110" />
+                                            </Grid>
+                                            
+                                            <Border Background="#CC051212" Height="36" BorderThickness="0,2,0,0" BorderBrush="White">
+                                                <TextBlock Text="{Binding name}" 
+                                                           Foreground="White" 
+                                                           FontWeight="Bold" 
+                                                           VerticalAlignment="Center" 
+                                                           HorizontalAlignment="Center"
+                                                           TextTrimming="CharacterEllipsis" 
+                                                           Padding="5,0"
+                                                           FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                                            </Border>
+                                            
+                                            <Border Background="#051212" Height="36">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding EtoilesDifficulte }" 
+                                                               Foreground="#FFD700" 
+                                                               FontSize="20" 
+                                                               FontFamily="Segoe UI Symbol"/>
+ 
+                                                </StackPanel>
+                                            </Border>
+                                            
+                                            
                                         </StackPanel>
-                        
+                                        
+                                        <Border BorderBrush="Black" 
+                                                BorderThickness="2" 
+                                                CornerRadius="2"
+                                                HorizontalAlignment="Left" 
+                                                VerticalAlignment="Bottom" 
+                                                Margin="5,5,0,15" 
+                                                Background="#80000000"> <Image Source="{Binding iconPath}" 
+                                                                               Width="32" Height="32" 
+                                                                               RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                                        </Border>
+                                        
+                                        
                                         <Button Content="X" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" 
-                                Background="Red" Foreground="White" BorderThickness="1" Margin="5"/>
+                                            Background="Red" Foreground="White" BorderThickness="1" Margin="5"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -279,9 +317,11 @@
                             <StackPanel Grid.Column="1" Margin="10,0,0,0">
                                 <TextBlock Text="DIFFICULTY:" Foreground="{StaticResource TextGreen}" Margin="0,0,0,5" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
                                 <ComboBox x:Name="InputDifficulty" Height="35" Background="#051212" BorderBrush="White" Foreground="{StaticResource TextGreen}" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" >
-                                    <ComboBoxItem Content="Beginner" Background="#051212"/>
-                                    <ComboBoxItem Content="Intermediate" Background="#051212"/>
-                                    <ComboBoxItem Content="Expert" Background="#051212" />
+                                    <ComboBoxItem Content="Peaceful" Background="#051212"/>
+                                    <ComboBoxItem Content="Easy" Background="#051212"/>
+                                    <ComboBoxItem Content="Normal" Background="#051212" />
+                                    <ComboBoxItem Content="Hard" Background="#051212" />
+                                    <ComboBoxItem Content="Hardcore" Background="#051212" />
                                 </ComboBox>
                                 <TextBlock Text="TARGET SPLIT:" Foreground="{StaticResource TextGreen}" Margin="0,15,0,5" FontSize="14" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
                                 <ComboBox x:Name="InputSplit" Height="35" Background="#051212" BorderBrush="#051212" Foreground="{StaticResource TextGreen}" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter">

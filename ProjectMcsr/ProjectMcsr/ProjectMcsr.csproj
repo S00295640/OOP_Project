@@ -19,6 +19,20 @@
       <Resource Include="Resources\Minecrafter.Reg.ttf" />
       <None Remove="Resources\Minecrafter.Alt.ttf" />
       <Resource Include="Resources\Minecrafter.Alt.ttf" />
+      <None Remove="Assets\Blind.png" />
+      <Resource Include="Assets\Blind.png" />
+      <None Remove="Assets\Bastion.png" />
+      <Resource Include="Assets\Bastion.png" />
+      <None Remove="Assets\End.png" />
+      <Resource Include="Assets\End.png" />
+      <None Remove="Assets\Fortress.png" />
+      <Resource Include="Assets\Fortress.png" />
+      <None Remove="Assets\nether .png" />
+      <Resource Include="Assets\Nether.png" />
+      <None Remove="Assets\Overworld.png" />
+      <Resource Include="Assets\Overworld.png" />
+      <None Remove="Assets\Stronghold.png" />
+      <Resource Include="Assets\Stronghold.png" />
     </ItemGroup>
 
 </Project>

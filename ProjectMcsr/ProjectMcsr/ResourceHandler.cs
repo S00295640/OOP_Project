@@ -8,9 +8,12 @@ public class MyResourceHandler
 {
     public List<Ressource> Resources { get; }
 
-    public void AddResource(Ressource resource)
+    public void AddResource(Ressource? resource)
     {
-        Resources.Add(resource);
+        if (resource == null)
+            throw new NullReferenceException();
+        if (!Resources.Contains(resource))
+            Resources.Add(resource);
     }
 
     public void RemoveResource(Ressource resource)

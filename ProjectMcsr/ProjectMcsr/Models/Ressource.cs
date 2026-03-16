@@ -14,9 +14,47 @@ public class Ressource
     public string? image { get; set; }
     public string? idVideo { get; set; }
     public Split? split { get; set; }
+
+    public string iconPath
+    {
+        get
+        {
+            return split switch
+            {
+                Split.Overworld => "/Assets/Overworld.png",
+                Split.EnterNether => "/Assets/Nether.png",
+                Split.Bastion => "/Assets/Bastion.png",
+                Split.Fortress => "/Assets/Fortress.png",
+                Split.Blind => "/Assets/Blind.png",
+                Split.Stronghold => "/Assets/Stronghold.png",
+                Split.End => "/Assets/End.png",
+                _ => "/Assets/Overworld.png" // (default hopefully never in this case if nothing broken)
+            };
+        }
+    }
+
+    public string EtoilesDifficulte
+    {
+        get
+        {
+            return difficulty switch
+            {
+                Difficulty.Peaceful => "★",
+                Difficulty.Easy => "★★",
+                Difficulty.Normal =>"★★★",
+                Difficulty.Hard => "★★★★",
+                Difficulty.Hardcore => "★★★★★",
+                _ => "☆" // (default hopefully never in this case if nothing broken)
+            };
+        }
+    }
     
     public Ressource(string author, string name,ResourceType? type,Difficulty? difficulty,string description,string? image,string? videoLink,Split? split)
     {
+        if (name == "" || description == "" || videoLink == "" || type == null || difficulty == null || split == null)
+        {
+            throw new ArgumentNullException();
+        }
         this.author = author;
         this.name = name;
         this.type = type;
@@ -29,6 +67,8 @@ public class Ressource
         {
             this.idVideo = videoLink.Split('v', '=', '/').Last();
         }
+
+        this.idVideo = $"https://img.youtube.com/vi/{idVideo}/maxresdefault.jpg";
     }
 
     public override string ToString()
