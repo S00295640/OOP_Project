@@ -95,7 +95,7 @@
             </StackPanel>
             
             
-            
+            <!-- MainMenu-->
             
             <StackPanel x:Name="MainMenuPanel" Margin="60,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 
@@ -108,7 +108,7 @@
                 
 
                 
-                    <Button Content="GUIDES" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnGuides_Click" />
+                    <Button Content="GUIDE" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnGuides_Click" />
                     <Button Content="FIND RESOURCES" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnFindResources_Click" />
                     <Button Content="POST NEW RESOURCE" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnPostResource_Click" />
                     <Button Content="QUIT" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnQuit_Click" />
@@ -117,6 +117,8 @@
                 
                 
             </StackPanel>
+            
+            <!-- Guide part-->
             
             
             <StackPanel x:Name="GuidePanel" Margin="60,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -134,7 +136,7 @@
                 <Button Content="BACK" Style="{StaticResource LargeMenuButtonStyle}" Click="BtnBack_Click"/>
             </StackPanel>
             
-            
+            <!-- FindResource part-->
             
             <StackPanel x:Name="FindResourcesPanel" Visibility="Visible" Margin="60,250,50,0">
                 <StackPanel.RenderTransform>
@@ -185,18 +187,19 @@
             </StackPanel>
             
             
-            
+            <!-- PostResource part-->
             
             <StackPanel x:Name="PostResourcePanel" Visibility="Visible" Margin="60,250,60,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel.RenderTransform>
                     <TranslateTransform x:Name="PostTransform" X="4000" />
                 </StackPanel.RenderTransform>
 
-                 <Border BorderBrush="White" BorderThickness="4" Background="{StaticResource TitleBg}" Padding="20" Margin="0,0,0,30" Width="700" HorizontalAlignment="Left">
+                 <Border BorderBrush="White" BorderThickness="4" Background="{StaticResource TitleBg}" Padding="20" Margin="0,0,0,30" Width="800" HorizontalAlignment="Left">
                     <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="500" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="175" />
                             </Grid.ColumnDefinitions>
                         <StackPanel>
                             <TextBlock Text="MY UPLOADED RESOURCES" FontSize="32" Foreground="{StaticResource TextGreen}" 
@@ -204,7 +207,22 @@
                             <TextBlock Text="Manage and add new speedrun guides" FontSize="14" Foreground="White" Opacity="0.7"/>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Content="+" Width="60" Height="60" 
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,-20,10,0">
+                            <TextBlock Text="SORT BY:" Foreground="{StaticResource TextGreen}" FontSize="10" Margin="0,0,0,5" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                            <ComboBox x:Name="SortSelector" Height="30"
+                                      Background="#051212" Foreground="{StaticResource TextGreen}" BorderBrush="White"
+                                      SelectionChanged="OnSortSelectionChange" FontFamily= "/ProjectMcsr;component/Resources/#Minecrafter" Padding="0,5,0,0">
+                                
+                                
+                                <ComboBoxItem Content="Name" IsSelected="True" Background="#051212"/>
+                                <ComboBoxItem Content="Type" Background="#051212"/>
+                                <ComboBoxItem Content="Difficulty" Background="#051212"/>
+                                <ComboBoxItem Content="Split" Background="#051212"/>
+                                <ComboBoxItem Content="Date" Background="#051212"/>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        <Button Grid.Column="2" Content="+" Width="60" Height="60" 
                         Style="{StaticResource LargeMenuButtonStyle}" Padding="0" FontSize="30" VerticalContentAlignment="Center" Click="BtnAddResource_Click" />
                         
                     </Grid>
@@ -282,7 +300,7 @@
                                         
                                         
                                         <Button Content="X" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" 
-                                            Background="Red" Foreground="White" BorderThickness="1" Margin="5"/>
+                                            Background="Red" Foreground="White" BorderThickness="1" Margin="5" Click="RemoveResource"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -294,6 +312,8 @@
                 Style="{StaticResource LargeMenuButtonStyle}" Click="BtnBackFromPost_Click"/>
             </StackPanel>
             
+            
+            <!-- Create Ressource Panel -->
             
             <StackPanel x:Name="CreateResourcePanel" Visibility="Visible" Margin="60,250,60,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel.RenderTransform>
@@ -371,5 +391,50 @@
             
             
             
+        
+        <!-- Confirmation Popup for removing ressource -->
+        
+        
+        
+            <Grid x:Name="DeleteConfirmOverlay" Visibility="Collapsed" Background="#AA000000">
+    
+                <Border Background="#051212" BorderBrush="Red" BorderThickness="2" 
+            CornerRadius="10" Width="300" Height="180" 
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+        
+                    <Border.RenderTransform>
+                        <ScaleTransform x:Name="MenuScale" CenterX="150" CenterY="90" ScaleX="0" ScaleY="0"/>
+                    </Border.RenderTransform>
+
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="SUPPRIMER ?" Foreground="White" FontSize="20" 
+                       FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"
+                       FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+            
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="OUI" Click="ConfirmDelete_Click" Width="80" Height="35" Background="#99FF66" Foreground="White" Margin="10" BorderThickness="0" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                                <Button Content="NON" Click="CancelDelete_Click" Width="80" Height="35" Background="#122B27" Foreground="White" Margin="10" BorderThickness="0" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                            </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Grid.Resources>
+                    <Storyboard x:Key="ShowMenuAnim">
+                        <DoubleAnimation Storyboard.TargetName="MenuScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.3">
+                            <DoubleAnimation.EasingFunction>
+                                <BackEase Amplitude="1" EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetName="MenuScale" Storyboard.TargetProperty="ScaleY"
+                                     To="1" Duration="0:0:0.3">
+                            <DoubleAnimation.EasingFunction>
+                            <BackEase Amplitude="1" EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </Grid.Resources>
+            </Grid>
         </Grid>
+        
+        
     </Window>

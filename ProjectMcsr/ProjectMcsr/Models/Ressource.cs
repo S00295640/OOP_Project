@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace ProjectMcsr.Models;
 
 
@@ -15,6 +16,9 @@ public class Ressource
     public string? image { get; set; }
     public string? idVideo { get; set; }
     public Split? split { get; set; }
+    
+    public float note { get; set; }
+    public DateTime date { get; set; }
     
     //Should add the Date of the parution of the tutorial
     public string Date { get; set; }
@@ -87,6 +91,7 @@ public class Ressource
         {
             throw new ArgumentNullException();
         }
+        this.date = DateTime.Now;
         this.author = author;
         this.name = name;
         this.type = type;
@@ -94,10 +99,18 @@ public class Ressource
         this.description = description;
         this.image = image;
         this.split = split;
+        this.note = 50;
         if (videoLink == null) return;
         if (videoLink.Contains("youtube.com") || videoLink.Contains("youtu.be"))
         {
-            this.idVideo = videoLink.Split('v', '=', '/').Last();
+            if (videoLink.Contains("&"))
+            {
+                string[] tmp = videoLink.Split('v', '=', '/','&');    
+                this.idVideo = tmp[tmp.Length - 3];
+                Console.WriteLine("id :" + idVideo + "---" + "\n");
+            }
+            else
+                this.idVideo = videoLink.Split('v', '=', '/','&').Last();
         }
 
         this.idVideo = $"https://img.youtube.com/vi/{idVideo}/maxresdefault.jpg";

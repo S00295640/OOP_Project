@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -312,7 +313,7 @@ public partial class MainWindow : Window
         OnResourceAdded();
         
         string author = "N12J1";
-        string name = InputName.Text;
+        string? name = InputName.Text;
         ResourceType? type = EnumTools.StringToResourceType(InputType.Text);
         Difficulty? difficulty = EnumTools.StringToDifficulty(InputDifficulty.Text);
         string description = InputDescription.Text;
@@ -325,13 +326,85 @@ public partial class MainWindow : Window
         }
         catch (Exception exception)
         {
-            //afficher erreur !
+            if (exception is NullReferenceException)
+            {
+                if (type == null)
+                {
+                    MessageBox.Show("Error ! type cannot be null", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+            if (difficulty == null)
+            {
+                MessageBox.Show("Error ! Difficulty cannot be null", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (videoLink == "")
+            {
+                MessageBox.Show("Error ! video link cannot be null", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return;
         }
-        
         
         MyResources.AddResource(resource);
         MyResourcesList.ItemsSource = null; 
         MyResourcesList.ItemsSource = MyResources.Resources;
         MyResources.SaveResources();
     }
+
+    private Ressource? _pendingDelete;
+    public void RemoveResource(object sender, RoutedEventArgs e)
+    {
+        Button button = (Button) sender;
+        _pendingDelete = button.DataContext as Ressource;
+        DeleteConfirmOverlay.Visibility = Visibility.Visible;
+        Storyboard sb = (Storyboard)DeleteConfirmOverlay.Resources["ShowMenuAnim"];
+        sb.Begin();
+        
+    }
+
+    public void ConfirmDelete_Click(object sender, RoutedEventArgs e)
+    {
+        if (_pendingDelete != null)
+        {
+           MyResources.RemoveResource(_pendingDelete); 
+        }
+        CloseDeleteMenu();
+    }
+
+    public void CancelDelete_Click(object sender, RoutedEventArgs e)
+    {
+        CloseDeleteMenu();
+    }
+
+    public void CloseDeleteMenu()
+    {
+        _pendingDelete = null;
+        DeleteConfirmOverlay.Visibility = Visibility.Collapsed;
+        MenuScale.ScaleX = 0;
+        MenuScale.ScaleY = 0;
+        
+        MyResourcesList.ItemsSource = null; 
+        MyResourcesList.ItemsSource = MyResources.Resources;
+    }
+
+    public void OnSortSelectionChange(object sender, SelectionChangedEventArgs e)
+    {
+        if (MyResources == null)
+        {
+            return;
+        }
+
+        SortBy? type = EnumTools.StringToSortBy(SortSelector.Text);
+        if (type != null)
+            MyResources.SortResourcesBy((SortBy) type);
+        else
+            MyResources.SortResourcesBy(SortBy.Name);
+        
+        MyResourcesList.ItemsSource = null; 
+        MyResourcesList.ItemsSource = MyResources.Resources;
+    }
+
+
 }

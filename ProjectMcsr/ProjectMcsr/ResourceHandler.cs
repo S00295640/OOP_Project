@@ -18,11 +18,13 @@ public class MyResourceHandler
         if (!Resources.Contains(resource))
             Resources.Add(resource);
         SortResourcesBy(SortBy.Name);
+        SaveResources();
     }
 
     public void RemoveResource(Ressource resource)
     {
         Resources.Remove(resource);
+        SaveResources();
     }
 
     public void SaveResources()
@@ -60,7 +62,7 @@ public class MyResourceHandler
                 query = Resources.OrderBy(r => r.name);
                 break;
             case SortBy.Date:
-                query = Resources.OrderBy(r => r.Date);
+                query = Resources.OrderBy(r => r.date);
                 break;
             case SortBy.Difficulty:
                 query = Resources.OrderBy(r => r.difficulty);

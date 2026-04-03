@@ -53,10 +53,27 @@ public static class EnumTools
             return Split.Blind;
         if (type == "stronghold")
             return Split.Stronghold;
-        if (type == "end")
+        if (type == "the end")
             return Split.End;
         if (type == "other")
             return Split.Other;
+        return null;
+    }
+
+    public static SortBy? StringToSortBy(string type)
+    {
+        type = type.ToLower();
+        if (type == "difficulty")
+            return SortBy.Difficulty;
+        if (type == "name")
+            return SortBy.Name;
+        if (type == "type")
+            return SortBy.Type;
+        if (type == "split")
+            return SortBy.Split;
+        if (type == "date")
+            return SortBy.Date;
+        
         return null;
     }
 
