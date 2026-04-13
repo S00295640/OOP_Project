@@ -104,4 +104,19 @@ public static class EnumTools
             return Difficulty.Peaceful;
         return null;
     }
+
+    public static int DifficultyToInt(Difficulty? difficulty)
+    {
+        if (difficulty == Difficulty.Hardcore)
+            return 5;
+        if (difficulty == Difficulty.Hard)
+            return 4;
+        if (difficulty == Difficulty.Normal)
+            return 3;
+        if (difficulty == Difficulty.Easy)
+            return 2;
+        if (difficulty == Difficulty.Peaceful)
+            return 1;
+        return 0;
+    }
 }

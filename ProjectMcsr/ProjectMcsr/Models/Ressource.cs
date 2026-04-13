@@ -87,7 +87,7 @@ public class Ressource
     
     public Ressource(string author, string name,ResourceType? type,Difficulty? difficulty,string description,string? image,string? videoLink,Split? split)
     {
-        if (name == "" || description == "" || videoLink == "" || type == null || difficulty == null || split == null)
+        if (name == "" || type == null || difficulty == null || split == null)
         {
             throw new ArgumentNullException();
         }

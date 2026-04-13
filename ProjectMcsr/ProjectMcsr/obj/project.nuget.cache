@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OT5qd8wvm8Q=",
+  "dgSpecHash": "akDv3UZKeoA=",
   "success": true,
   "projectFilePath": "D:\\XAML_Project\\OOP_Project\\ProjectMcsr\\ProjectMcsr\\ProjectMcsr.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\julien\\.nuget\\packages\\microsoft.web.webview2\\1.0.3908-prerelease\\microsoft.web.webview2.1.0.3908-prerelease.nupkg.sha512"
+  ],
   "logs": []
 }
