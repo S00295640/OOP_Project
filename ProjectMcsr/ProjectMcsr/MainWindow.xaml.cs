@@ -29,18 +29,8 @@ public partial class MainWindow : Window
         InitializeComponent();
         MyResourceHandler handler = Initialize();
         this.Closing += (s, e) => handler.SaveResources();
-        InitializeWebView();
     }
     
-    private async void InitializeWebView()
-    {
-        // On crée un dossier pour que le navigateur puisse stocker ses données (cookies/sessions)
-        var environment = await CoreWebView2Environment.CreateAsync(
-            userDataFolder: System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "WebViewData"));
-    
-        await YoutubePlayer.EnsureCoreWebView2Async(environment);
-        YoutubePlayer.CoreWebView2.Settings.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
-    }
     
 
     private MyResourceHandler Initialize()
@@ -228,6 +218,7 @@ public partial class MainWindow : Window
         TranslateTransform menuTransform = new TranslateTransform();
         MainMenuPanel.RenderTransform = menuTransform;
         menuTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
+        CloseDetail_Click(null, null);
     }
 
     private void BtnAddResource_Click(object sender, RoutedEventArgs e)
@@ -345,6 +336,7 @@ public partial class MainWindow : Window
             Console.WriteLine("split : " + split);
             Console.WriteLine("difficulty : " + difficulty);
             resource = new Ressource(author, name, type, difficulty, description, null, videoLink, split);
+            resource.GetChannelName();
         }
         catch (Exception exception)
         {
@@ -449,9 +441,18 @@ public partial class MainWindow : Window
         Border border = sender as Border;
         Ressource ressource = border.DataContext as Ressource;
 
+        DetailOverlay.DataContext = ressource; 
+        
+        DetailTitle.Text = ressource.name;
+        
         DetailTitle.Text = ressource.name;
         DetailDescription.Text = ressource.description;
-        YoutubePlayer.Source = new Uri($"https://www.youtube.com/embed/{ressource.idVideo}");
+        
+        BitmapImage bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.UriSource = new Uri(ressource.idVideo, UriKind.Absolute);
+        bitmap.EndInit();
+        YoutubeImage.Source = bitmap;
         
         Storyboard sb = (Storyboard)FindResource("SlideInMenu");
         sb.Begin();
@@ -481,6 +482,20 @@ public partial class MainWindow : Window
     {
         Storyboard sb = (Storyboard)FindResource("SlideOutMenu");
         sb.Begin();
+    }
+    private void OnWatchOnYoutubeClicked(object sender, RoutedEventArgs e)
+    {
+        if (DetailTitle.DataContext is Ressource ressource)
+        {
+            Console.WriteLine(ressource);
+            string url = $"https://www.youtube.com/watch?v={ressource.OnlyIdVideo}";
+        
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
     }
 
 }

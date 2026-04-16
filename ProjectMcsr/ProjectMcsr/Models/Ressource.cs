@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Net.Http;
+using System.Text.Json; 
+using System.Threading.Tasks;
 
 namespace ProjectMcsr.Models;
 
@@ -15,6 +17,7 @@ public class Ressource
     public string description { get; set; }
     public string? image { get; set; }
     public string? idVideo { get; set; }
+    public string? OnlyIdVideo  { get; set; }
     public Split? split { get; set; }
     
     public float note { get; set; }
@@ -87,6 +90,7 @@ public class Ressource
     
     public Ressource(string author, string name,ResourceType? type,Difficulty? difficulty,string description,string? image,string? videoLink,Split? split)
     {
+        
         if (name == "" || type == null || difficulty == null || split == null)
         {
             throw new ArgumentNullException();
@@ -112,13 +116,39 @@ public class Ressource
             else
                 this.idVideo = videoLink.Split('v', '=', '/','&').Last();
         }
-
+        this.OnlyIdVideo = idVideo;
         this.idVideo = $"https://img.youtube.com/vi/{idVideo}/maxresdefault.jpg";
     }
+    
+    
+    public async void GetChannelName()
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            string oEmbedUrl = $"https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v={this.OnlyIdVideo}&format=json";
+        
+            try 
+            {
+                string json = await client.GetStringAsync(oEmbedUrl);
+            
+                // On parse le JSON pour extraire 'author_name'
+                using (JsonDocument doc = JsonDocument.Parse(json))
+                {
+                    JsonElement root = doc.RootElement;
+                    this.author = root.GetProperty("author_name").GetString();
+                }
+            }
+            catch
+            {
+                this.author = "Unknown";
+            }
+        }
+    }
+    
 
     public override string ToString()
     {
-        return $"--------------------\n\rName : {name}\n\rDescription :\n\r{description}\n\rType : {type.ToString()}\n\rDifficulty : {difficulty.ToString()}\n\rVideo ID : {idVideo}\n\rSplit : {split.ToString()}\n\r--------------------";
+        return $"--------------------\n\rName : {name} \n\rAuthor : {author}\n\rDescription :\n\r{description}\n\rType : {type.ToString()}\n\rDifficulty : {difficulty.ToString()}\n\rVideo ID : {idVideo} /{OnlyIdVideo}/\n\rSplit : {split.ToString()}\n\r--------------------";
     }
 
 }

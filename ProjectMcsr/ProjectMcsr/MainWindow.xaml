@@ -95,28 +95,32 @@
                     </VisualBrush>
                 </Rectangle.Fill>
             </Rectangle>
-
             
-            <StackPanel x:Name="McsrPanel" Margin="60,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <!-- Big text always here -->
+            
+            <StackPanel x:Name="McsrPanel" Margin="60,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
                 
                
                 <Border BorderBrush="White" BorderThickness="5" Background="{StaticResource TitleBg}" Padding="20,20" Margin="0,0,0,60">
                     <StackPanel>
                         <TextBlock Text="MINECRAFT" 
                                    Foreground="{StaticResource TextGreen}" 
-                                   FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                                   FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" Padding="0,0,0,5"/>
                         <TextBlock Text="SPEEDRUNNING" 
                                    Foreground="{StaticResource TextGreen}" 
-                                   FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" Margin="0,-10,0,0"/>
+                                   FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" Margin="0,-10,0,0" Padding="0,0,0,5"/>
+                        <TextBlock Text="Youtube Documentation" 
+                                   Foreground="{StaticResource TextGreen}" 
+                                   FontSize="54" FontWeight="Black" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" Margin="0,-10,0,0" Padding="0,0,0,5"/>
                     </StackPanel>
                 </Border>
                 
             </StackPanel>
             
-            
             <!-- MainMenu-->
             
-            <StackPanel x:Name="MainMenuPanel" Margin="60,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            
+            <StackPanel x:Name="MainMenuPanel" Margin="60,275,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 
                 
 
@@ -140,7 +144,7 @@
             <!-- Guide part-->
             
             
-            <StackPanel x:Name="GuidePanel" Margin="60,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel x:Name="GuidePanel" Margin="60,275,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel.RenderTransform>
                     <TranslateTransform x:Name="GuidesTransform" X="4000" />
                 </StackPanel.RenderTransform>
@@ -157,7 +161,7 @@
             
             <!-- FindResource part-->
             
-            <StackPanel x:Name="FindResourcesPanel" Visibility="Visible" Margin="60,250,50,0">
+            <StackPanel x:Name="FindResourcesPanel" Visibility="Visible" Margin="60,300,50,0">
                 <StackPanel.RenderTransform>
                     <TranslateTransform x:Name="FindResourcesTransform" X="4000" />
                 </StackPanel.RenderTransform>
@@ -208,7 +212,7 @@
             
             <!-- PostResource part-->
             
-            <StackPanel x:Name="PostResourcePanel" Visibility="Visible" Margin="60,250,60,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel x:Name="PostResourcePanel" Visibility="Visible" Margin="60,300,60,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel.RenderTransform>
                     <TranslateTransform x:Name="PostTransform" X="4000" />
                 </StackPanel.RenderTransform>
@@ -334,7 +338,7 @@
             
             <!-- Create Ressource Panel -->
             
-            <StackPanel x:Name="CreateResourcePanel" Visibility="Visible" Margin="60,250,60,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel x:Name="CreateResourcePanel" Visibility="Visible" Margin="60,275,60,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel.RenderTransform>
                     <TranslateTransform x:Name="CreateTransform" X="4000" />
                 </StackPanel.RenderTransform>
@@ -481,8 +485,12 @@
                     <StackPanel Margin="20">
                     
                     
-                        <TextBlock x:Name="DetailTitle" Text="TITRE ICI" FontSize="28" Foreground="White" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="410" VerticalAlignment="Top"/>
-                        <wpf:WebView2 x:Name="YoutubePlayer" Height="250" Margin="0,20"/>
+                        <TextBlock x:Name="DetailTitle" Text="TITRE ICI" FontSize="28" Foreground="White" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="410" VerticalAlignment="Top" Padding="0,0,0,20"/>
+                        
+                            <Border BorderBrush="White" BorderThickness="5" Background="{StaticResource TitleBg}" Padding="0,0,0,0" >
+                                <Image x:Name="YoutubeImage" Height="250" Margin="0,20"> </Image>
+                            </Border>
+                        
                         <TextBlock Text="Description" FontSize="18" Foreground="Gray" Margin="0,10,0,5" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
                         <TextBlock x:Name ="DetailDescription" Text="Ceci est la description complète de la ressource..." Foreground="White" TextWrapping="Wrap" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
         
@@ -522,9 +530,37 @@
                             </StackPanel>
     
                         </DockPanel>
+                        
+                        
+                        <Button x:Name="WatchOnYoutubeButton" 
+                                Click="OnWatchOnYoutubeClicked" 
+                                Margin="0,20,0,0" 
+                                Padding="10,5" 
+                                Background="#FF0000" 
+                                Foreground="White" 
+                                BorderThickness="0"
+                                Cursor="Hand">
+    
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="/Assets/youtube_logo.png" 
+                                       Width="24" Height="24" 
+                                       Margin="0,0,8,0" 
+                                       RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+        
+                                <TextBlock Text="Regarder sur YouTube" 
+                                           VerticalAlignment="Center" 
+                                           FontSize="16" 
+                                           FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                            </StackPanel>
+                        </Button>
                         <Button Content="Back" Click="CloseDetail_Click" Margin="0,30,0,0" Style="{StaticResource LargeMenuButtonStyle}"/>
+                        
+                        
                     </StackPanel>
                 </Border>
+                
+                
+                
             </Grid>
             
             

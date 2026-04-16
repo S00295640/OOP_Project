@@ -2,15 +2,14 @@
     C/Note
     E/Auteur
     F/Date
-10/Ajouter un moyen d'ajouter une image personnaliser au tuto
+10/Ajouter un moyen d'ajouter une image personnaliser au tuto ???
 
 
-//Très très long truc a faire
-
-Online
 Onglet recherche
+Online
 Onglet Guide
 
 ???
 
 System de compte et d'auteur (lié avec l'api mcsr ranked pour l identidé ???)
+
