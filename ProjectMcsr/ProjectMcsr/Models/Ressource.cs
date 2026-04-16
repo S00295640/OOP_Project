@@ -18,8 +18,8 @@ public class Ressource
     public string? image { get; set; }
     public string? idVideo { get; set; }
     public string? OnlyIdVideo  { get; set; }
+    //public List<Split?> splits { get; set; }
     public Split? split { get; set; }
-    
     public float note { get; set; }
     public DateTime date { get; set; }
     
@@ -31,24 +31,69 @@ public class Ressource
     //Think about it later during the "Search For Resources" part
     /* public List<Tag>? tags { get; set; }*/
 
+    /*public List<string> iconsPath
+    {
+        get
+        {
+            List<string> icons = new List<string>();
+            foreach (Split? split in this.split)
+            {
+                icons.Add(split switch
+                {
+                    Split.Overworld => "/Assets/Overworld.png",
+                    Split.EnterNether => "/Assets/Nether.png",
+                    Split.Bastion => "/Assets/Bastion.png",
+                    Split.Fortress => "/Assets/Fortress.png",
+                    Split.Blind => "/Assets/Blind.png",
+                    Split.Stronghold => "/Assets/Stronghold.png",
+                    Split.End => "/Assets/End.png",
+                    _ => "/Assets/Overworld.png" // (default hopefully never in this case if nothing broken)
+                });
+            }
+            return icons;
+        }
+    }*/
+    
+    /*public List<string> iconsPath
+    {
+        get
+        {
+            List<string> icons = new List<string>();
+            foreach (Split? split in this.split)
+            {
+                icons.Add(split switch
+                {
+                    Split.Overworld => "/Assets/Overworld.png",
+                    Split.EnterNether => "/Assets/Nether.png",
+                    Split.Bastion => "/Assets/Bastion.png",
+                    Split.Fortress => "/Assets/Fortress.png",
+                    Split.Blind => "/Assets/Blind.png",
+                    Split.Stronghold => "/Assets/Stronghold.png",
+                    Split.End => "/Assets/End.png",
+                    _ => "/Assets/Overworld.png" // (default hopefully never in this case if nothing broken)
+                });
+            }
+            return icons;
+        }
+    }*/
+    
     public string iconPath
     {
         get
         {
-            return split switch
-            {
-                Split.Overworld => "/Assets/Overworld.png",
-                Split.EnterNether => "/Assets/Nether.png",
-                Split.Bastion => "/Assets/Bastion.png",
-                Split.Fortress => "/Assets/Fortress.png",
-                Split.Blind => "/Assets/Blind.png",
-                Split.Stronghold => "/Assets/Stronghold.png",
-                Split.End => "/Assets/End.png",
-                _ => "/Assets/Overworld.png" // (default hopefully never in this case if nothing broken)
-            };
+                return split switch
+                {
+                    Split.Overworld => "/Assets/Overworld.png",
+                    Split.EnterNether => "/Assets/Nether.png",
+                    Split.Bastion => "/Assets/Bastion.png",
+                    Split.Fortress => "/Assets/Fortress.png",
+                    Split.Blind => "/Assets/Blind.png",
+                    Split.Stronghold => "/Assets/Stronghold.png",
+                    Split.End => "/Assets/End.png",
+                    _ => "/Assets/Overworld.png" // (default hopefully never in this case if nothing broken)
+                };
         }
     }
-
     
     public IEnumerable DiffNumber
     {
@@ -90,7 +135,7 @@ public class Ressource
     
     public Ressource(string author, string name,ResourceType? type,Difficulty? difficulty,string description,string? image,string? videoLink,Split? split)
     {
-        
+        //this.splits = new List<Split?>();
         if (name == "" || type == null || difficulty == null || split == null)
         {
             throw new ArgumentNullException();
@@ -102,6 +147,7 @@ public class Ressource
         this.difficulty = difficulty;
         this.description = description;
         this.image = image;
+        //this.splits.Add(split);
         this.split = split;
         this.note = 50;
         if (videoLink == null) return;

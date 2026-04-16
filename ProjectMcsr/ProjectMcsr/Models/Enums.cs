@@ -34,6 +34,7 @@ public enum SortBy
     Type,
     Split,
     Date,
+    Author,
 }
 
 public static class EnumTools
@@ -73,6 +74,8 @@ public static class EnumTools
             return SortBy.Split;
         if (type == "date")
             return SortBy.Date;
+        if (type == "author")
+            return SortBy.Author;
         
         return null;
     }

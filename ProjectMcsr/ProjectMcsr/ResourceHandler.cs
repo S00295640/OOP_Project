@@ -73,6 +73,9 @@ public class MyResourceHandler
             case SortBy.Split:
                 query = Resources.OrderBy(r => r.split);
                 break;
+            case SortBy.Author:
+                query = Resources.OrderBy(r => r.author);
+                break;
         }
         Resources = query.ToList();
         

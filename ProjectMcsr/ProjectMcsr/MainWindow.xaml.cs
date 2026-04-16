@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -24,6 +25,7 @@ namespace ProjectMcsr;
 public partial class MainWindow : Window
 {
     public MyResourceHandler MyResources;
+    ObservableCollection<Ressource> FilteredRessources;
     public MainWindow()
     {
         InitializeComponent();
@@ -97,6 +99,7 @@ public partial class MainWindow : Window
         TranslateTransform menuTransform = new TranslateTransform();
         MainMenuPanel.RenderTransform = menuTransform;
         menuTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
+        CloseDetail_Click(null, null);
     }
 
     private void BtnFindResources_Click(object sender, RoutedEventArgs e)
@@ -189,6 +192,7 @@ public partial class MainWindow : Window
         TranslateTransform menuTransform = new TranslateTransform();
         MainMenuPanel.RenderTransform = menuTransform;
         menuTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
+        CloseDetail_Click(null, null);
     }
 
     private void BtnBackFromPost_Click(object sender, RoutedEventArgs e)
@@ -414,9 +418,11 @@ public partial class MainWindow : Window
         ComboBox dropDown = sender as ComboBox;
         
         SortBy? type = EnumTools.StringToSortBy((dropDown.SelectedItem as ComboBoxItem).Content.ToString());
-        
+
         if (type != null)
+        {
             MyResources.SortResourcesBy((SortBy)type);
+        }
         else
             MyResources.SortResourcesBy(SortBy.Name);
 
@@ -447,6 +453,7 @@ public partial class MainWindow : Window
         
         DetailTitle.Text = ressource.name;
         DetailDescription.Text = ressource.description;
+        DetailAuthorName.Text = ressource.author;
         
         BitmapImage bitmap = new BitmapImage();
         bitmap.BeginInit();
@@ -462,6 +469,8 @@ public partial class MainWindow : Window
         for (int i = 0; i < EnumTools.DifficultyToInt(ressource.difficulty); i++) { listeCoeurs.Add(1); }
         
         DifficultyHeartsControl.ItemsSource = listeCoeurs;
+        
+        
         if (ressource.split == Split.Bastion) 
             SplitIcon.Source = new BitmapImage(new Uri(@"pack://application:,,,/Assets/Bastion.png"));
         if (ressource.split == Split.Blind) 
@@ -496,6 +505,59 @@ public partial class MainWindow : Window
                 UseShellExecute = true
             });
         }
+    }
+    
+    //--find part--
+    
+    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        
+        if (MyResources == null || ResourcesList == null) 
+            return;
+        
+        string searchText = searchTextBox.Text.Trim().ToLower();
+
+        
+        
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            FilteredRessources = new ObservableCollection<Ressource>(MyResources.Resources);
+        }
+        else
+        {
+
+            var results = MyResources.Resources.Where(r =>
+                r.name.ToLower().Contains(searchText) ||
+                r.description.ToLower().Contains(searchText) ||
+                r.author.ToLower().Contains(searchText) ||
+                r.split.ToString().ToLower().Contains(searchText)
+            );
+            
+            string selectedSort = (SortSelectorFindMenu.SelectedItem as ComboBoxItem)?.Content.ToString();
+            results = selectedSort switch
+            {
+                "Type"       => results.OrderBy(r => r.type),
+                "Difficulty" => results.OrderByDescending(r => r.difficulty), // Souvent on veut la diff max en haut
+                "Split"      => results.OrderBy(r => r.split),
+                "Date"       => results.OrderByDescending(r => r.date),
+                "Author"      => results.OrderBy(r => r.author),
+                _            => results.OrderBy(r => r.name), // Par défaut : Name
+            };
+                
+                
+
+            FilteredRessources = new ObservableCollection<Ressource>(results);
+        }
+    
+        
+        ResourcesList.ItemsSource = FilteredRessources;
+    }
+
+    private void OnSortSelectionChangeFindMenu(object sender, RoutedEventArgs e)
+    {
+        if (searchTextBox == null || MyResources == null || ResourcesList == null) 
+            return;
+        OnSearchTextChanged(null, null);
     }
 
 }

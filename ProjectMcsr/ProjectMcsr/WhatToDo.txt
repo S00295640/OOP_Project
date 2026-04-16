@@ -1,11 +1,10 @@
 ﻿6/ajouter un onglet arrivant a droite donnant
     C/Note
-    E/Auteur
     F/Date
 10/Ajouter un moyen d'ajouter une image personnaliser au tuto ???
 
 
-Onglet recherche
+Modifier l aspect visuel du dropdown de tri de find resource
 Online
 Onglet Guide
 
@@ -13,3 +12,10 @@ Onglet Guide
 
 System de compte et d'auteur (lié avec l'api mcsr ranked pour l identidé ???)
 
+
+Ajouter plusieurs Splits affichés possible ?
+Levenshtein algorithm for research ????
+
+utiliser github pages pour publier ? 
+
+traduitre regarder sur ytb
