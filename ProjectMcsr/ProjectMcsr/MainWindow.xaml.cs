@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Web.WebView2.Core;
@@ -70,6 +71,21 @@ public partial class MainWindow : Window
         TranslateTransform guideTransform = new TranslateTransform();
         GuidePanel.RenderTransform = guideTransform;
         guideTransform.BeginAnimation(TranslateTransform.XProperty, slideIn);
+        
+        
+        string url = $"https://metafy.gg/guides/view/ultimate-minecraft-speedrun-guide-cIzfjeTmwOm";
+
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = url,
+            UseShellExecute = true
+        });
+    }
+
+    private void BtnCopyLink_Click(object sender, RoutedEventArgs e)
+    {
+        Clipboard.SetText("https://metafy.gg/guides/view/ultimate-minecraft-speedrun-guide-cIzfjeTmwOm");
+        ShowWarningMessage("Link copied to clipboard!");
     }
 
     private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -231,7 +247,7 @@ public partial class MainWindow : Window
         DoubleAnimation slideOut = new DoubleAnimation()
         {
             From = 0,
-            To = -1000,
+            To = -2000,
             Duration = TimeSpan.FromSeconds(0.5),
             AccelerationRatio = 0.5
         };
@@ -319,8 +335,6 @@ public partial class MainWindow : Window
     }
     private void BtnConfirmCreate_Click(object sender, RoutedEventArgs e)
     {
-        OnResourceAdded();
-        
         string author = "N12J1";
         string? name = InputName.Text;
         ResourceType? type = EnumTools.StringToResourceType(InputType.Text);
@@ -340,7 +354,12 @@ public partial class MainWindow : Window
             Console.WriteLine("split : " + split);
             Console.WriteLine("difficulty : " + difficulty);
             resource = new Ressource(author, name, type, difficulty, description, null, videoLink, split);
-            resource.GetChannelName();
+            resource.GetChannelNameAndDate();
+            OnResourceAdded();
+            MyResources.AddResource(resource);
+            MyResourcesList.ItemsSource = null; 
+            MyResourcesList.ItemsSource = MyResources.Resources;
+            MyResources.SaveResources();
         }
         catch (Exception exception)
         {
@@ -354,6 +373,11 @@ public partial class MainWindow : Window
                 ShowErrorMessage("Error ! TYPE cannot be null");
             }
 
+            if (split == null)
+            {
+                ShowErrorMessage("Error ! SPLIT cannot be null");
+            }
+
             if (difficulty == null)
             {
                 ShowErrorMessage("Error ! DIFFICULTY cannot be null");
@@ -361,16 +385,13 @@ public partial class MainWindow : Window
 
             if (videoLink == "")
             {
-                MessageBox.Show("Error ! video link cannot be null", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage("Error ! video link cannot be null");
             }
             
             return;
         }
         
-        MyResources.AddResource(resource);
-        MyResourcesList.ItemsSource = null; 
-        MyResourcesList.ItemsSource = MyResources.Resources;
-        MyResources.SaveResources();
+
     }
 
     private Ressource? _pendingDelete;
@@ -434,11 +455,21 @@ public partial class MainWindow : Window
     {
         MessageOverlay.Visibility = Visibility.Collapsed;
     }
+    public void CloseWarning_Click(object sender, RoutedEventArgs e)
+    {
+        WarningOverlay.Visibility = Visibility.Collapsed;
+    }
 
     private void ShowErrorMessage(string message)
     {
         ErrorMessageText.Text = message;
         MessageOverlay.Visibility = Visibility.Visible;
+    }
+
+    private void ShowWarningMessage(string message)
+    {
+        WarningMessageText.Text = message;
+        WarningOverlay.Visibility = Visibility.Visible;
     }
 
 
@@ -454,7 +485,8 @@ public partial class MainWindow : Window
         DetailTitle.Text = ressource.name;
         DetailDescription.Text = ressource.description;
         DetailAuthorName.Text = ressource.author;
-        
+        DateControl.Text = ressource.date.ToString("dd/MM/yyyy");
+        //DateControl.Text = ressource.GetVideoStats().Result.ToString() + "%";
         BitmapImage bitmap = new BitmapImage();
         bitmap.BeginInit();
         bitmap.UriSource = new Uri(ressource.idVideo, UriKind.Absolute);
@@ -518,10 +550,25 @@ public partial class MainWindow : Window
         string searchText = searchTextBox.Text.Trim().ToLower();
 
         
-        
         if (string.IsNullOrWhiteSpace(searchText))
         {
-            FilteredRessources = new ObservableCollection<Ressource>(MyResources.Resources);
+            var results = MyResources.Resources.Where(r =>
+                r.name.ToLower().Contains(searchText) ||
+                r.description.ToLower().Contains(searchText) ||
+                r.author.ToLower().Contains(searchText) ||
+                r.split.ToString().ToLower().Contains(searchText)
+            );
+            string selectedSort = (SortSelectorFindMenu.SelectedItem as ComboBoxItem)?.Content.ToString();
+            results = selectedSort switch
+            {
+                "Type" => results.OrderBy(r => r.type),
+                "Difficulty" => results.OrderByDescending(r => r.difficulty), // Souvent on veut la diff max en haut
+                "Split" => results.OrderBy(r => r.split),
+                "Date" => results.OrderByDescending(r => r.date),
+                "Author" => results.OrderBy(r => r.author),
+                _ => results.OrderBy(r => r.name), // Par défaut : Name
+            };
+            FilteredRessources = new ObservableCollection<Ressource>(results);
         }
         else
         {
@@ -532,24 +579,20 @@ public partial class MainWindow : Window
                 r.author.ToLower().Contains(searchText) ||
                 r.split.ToString().ToLower().Contains(searchText)
             );
-            
+
             string selectedSort = (SortSelectorFindMenu.SelectedItem as ComboBoxItem)?.Content.ToString();
             results = selectedSort switch
             {
-                "Type"       => results.OrderBy(r => r.type),
+                "Type" => results.OrderBy(r => r.type),
                 "Difficulty" => results.OrderByDescending(r => r.difficulty), // Souvent on veut la diff max en haut
-                "Split"      => results.OrderBy(r => r.split),
-                "Date"       => results.OrderByDescending(r => r.date),
-                "Author"      => results.OrderBy(r => r.author),
-                _            => results.OrderBy(r => r.name), // Par défaut : Name
+                "Split" => results.OrderBy(r => r.split),
+                "Date" => results.OrderByDescending(r => r.date),
+                "Author" => results.OrderBy(r => r.author),
+                _ => results.OrderBy(r => r.name), // Par défaut : Name
             };
-                
-                
-
             FilteredRessources = new ObservableCollection<Ressource>(results);
         }
-    
-        
+
         ResourcesList.ItemsSource = FilteredRessources;
     }
 

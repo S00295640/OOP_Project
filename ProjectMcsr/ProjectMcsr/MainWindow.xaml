@@ -155,8 +155,13 @@
                         <TranslateTransform x:Name="MainMenuTransform" X="1000"/> </ContentControl.RenderTransform>
                 </ContentControl>
                 
-                <Button Content="This is the guide part" Style="{StaticResource LargeMenuButtonStyle}" Width="550" Click = "BtnGuides_Click" />
-                <Button Content="BACK" Style="{StaticResource LargeMenuButtonStyle}" Click="BtnBack_Click"/>
+                <TextBlock Foreground="White" FontSize="30" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter">A Metafy link should open in your navigator. This is a guide created by members of the community and published by the speedrunner Couriway.</TextBlock>
+                
+                <Button Content="It does'nt work I want the link" Style="{StaticResource LargeMenuButtonStyle}" Click = "BtnCopyLink_Click" Width="550" HorizontalAlignment="Left" Margin="0,100,0,0"/>
+                <Button Content="BACK" Style="{StaticResource LargeMenuButtonStyle}" Click="BtnBack_Click" HorizontalAlignment="Left" Margin="0,20,0,0" />
+                
+                
+                
             </StackPanel>
             
             <!-- FindResource part-->
@@ -174,16 +179,16 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="searchTextBox" Height="40" Background="#051212" Foreground="{StaticResource TextGreen}" TextChanged="OnSearchTextChanged" 
+                                <TextBox x:Name="searchTextBox" Height="40" Margin= "0,0,50,0" Background="#051212" Foreground="{StaticResource TextGreen}" TextChanged="OnSearchTextChanged" 
                                      BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" 
                                      Padding="10,0" FontSize="18" CaretBrush="White" Tag="Search for a guide or tool..." FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
                                 
                                 
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,-20,10,0">
-                                    <TextBlock Text="SORT BY:" Foreground="{StaticResource TextGreen}" FontSize="10" Margin="0,0,0,5" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                                    <TextBlock Text="SORT BY:" Foreground="{StaticResource TextGreen}" FontSize="10" Margin="0,0,50,5" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
                                     <ComboBox x:Name="SortSelectorFindMenu" Height="30"
                                               Background="#051212" Foreground="{StaticResource TextGreen}" BorderBrush="White"
-                                              SelectionChanged="OnSortSelectionChangeFindMenu" FontFamily= "/ProjectMcsr;component/Resources/#Minecrafter" Padding="0,5,0,0">
+                                              SelectionChanged="OnSortSelectionChangeFindMenu" FontFamily= "/ProjectMcsr;component/Resources/#Minecrafter" Padding="15,5,30,0" Margin="0,0,50,0">
                                 
                                 
                                         <ComboBoxItem Content="Name" IsSelected="True" Background="#051212"/>
@@ -269,9 +274,10 @@
                                                                                RenderOptions.BitmapScalingMode="NearestNeighbor" />
                                         </Border>
                                         
-                                        
+                                        <!--
                                         <Button Content="X" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" 
                                             Background="Red" Foreground="White" BorderThickness="1" Margin="5" Click="RemoveResource"/>
+                                         -->
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -495,17 +501,39 @@
         
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock Text="ERREUR" Foreground="Red" FontSize="24" 
-                                   HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                   HorizontalAlignment="Center" Margin="0,0,0,10" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
             
                         <TextBlock x:Name="ErrorMessageText" Text="Le champ X est vide !" 
                                    Foreground="White" FontSize="16" TextAlignment="Center" 
-                                   Margin="20" TextWrapping="Wrap"/>
+                                   Margin="20" TextWrapping="Wrap" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
             
                         <Button Content="OK" Click="CloseMessage_Click" Width="80" Height="35" 
-                                Background="Gray" Foreground="White"/>
+                                Background="Gray" Foreground="White" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
                     </StackPanel>
                 </Border>
             </Grid>
+            
+            
+            <Grid x:Name="WarningOverlay" Visibility="Collapsed" Background="#AA000000">
+                <Border Background="#051212" BorderBrush="Orange" BorderThickness="2" 
+                        CornerRadius="10" Width="350" Height="200" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center">
+        
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Warning" Foreground="Orange" FontSize="24" 
+                                   HorizontalAlignment="Center" Margin="0,0,0,10" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+            
+                        <TextBlock x:Name="WarningMessageText" Text="Le champ X est vide !" 
+                                   Foreground="White" FontSize="16" TextAlignment="Center" 
+                                   Margin="20" TextWrapping="Wrap" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" />
+            
+                        <Button Content="OK" Click="CloseWarning_Click" Width="80" Height="35" 
+                                Background="Gray" Foreground="White" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            
+            
             
         
         <!-- Confirmation Popup for removing ressource -->
@@ -523,7 +551,7 @@
                     </Border.RenderTransform>
 
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="SUPPRIMER ?" Foreground="White" FontSize="20" 
+                        <TextBlock Text="DELETE RESOURCE ?" Foreground="White" FontSize="20" 
                        FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"
                        FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>
             
@@ -613,6 +641,17 @@
                         </DockPanel>
                         
                         
+                        
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" >
+                                <TextBlock Text="Date: " Foreground="Gray" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" FontSize="18"/>
+                                <TextBlock x:Name="DateControl" Text="Unknown" Foreground="White" FontFamily="/ProjectMcsr;component/Resources/#Minecrafter" FontSize="20" Padding="0,0,0,0"/>
+                            </StackPanel>
+    
+                        
+                        
+                        
+                        
+                        
                         <Button x:Name="WatchOnYoutubeButton" 
                                 Click="OnWatchOnYoutubeClicked" 
                                 Margin="0,20,0,0" 
@@ -628,7 +667,7 @@
                                        Margin="0,0,8,0" 
                                        RenderOptions.BitmapScalingMode="NearestNeighbor"/>
         
-                                <TextBlock Text="Regarder sur YouTube" 
+                                <TextBlock Text="Watch on Youtube"
                                            VerticalAlignment="Center" 
                                            FontSize="16" 
                                            FontFamily="/ProjectMcsr;component/Resources/#Minecrafter"/>

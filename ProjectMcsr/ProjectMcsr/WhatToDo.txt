@@ -1,21 +1,14 @@
 ﻿6/ajouter un onglet arrivant a droite donnant
     C/Note
-    F/Date
 10/Ajouter un moyen d'ajouter une image personnaliser au tuto ???
-
-
-Modifier l aspect visuel du dropdown de tri de find resource
-Online
-Onglet Guide
-
-???
-
 System de compte et d'auteur (lié avec l'api mcsr ranked pour l identidé ???)
-
-
 Ajouter plusieurs Splits affichés possible ?
 Levenshtein algorithm for research ????
-
 utiliser github pages pour publier ? 
 
-traduitre regarder sur ytb
+
+
+
+
+Online
+ajouter erreur pour target split et autre dropdowng

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
-using System.Text.Json; 
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ProjectMcsr.Models;
@@ -23,8 +24,6 @@ public class Ressource
     public float note { get; set; }
     public DateTime date { get; set; }
     
-    //Should add the Date of the parution of the tutorial
-    public string Date { get; set; }
 
     //Maybe adding Some tags Later
     //A Tag class is Created but is useless for the moment
@@ -140,7 +139,6 @@ public class Ressource
         {
             throw new ArgumentNullException();
         }
-        this.date = DateTime.Now;
         this.author = author;
         this.name = name;
         this.type = type;
@@ -167,7 +165,7 @@ public class Ressource
     }
     
     
-    public async void GetChannelName()
+    public async void GetChannelNameAndDate()
     {
         using (HttpClient client = new HttpClient())
         {
@@ -175,14 +173,40 @@ public class Ressource
         
             try 
             {
+                
+                //Name 
                 string json = await client.GetStringAsync(oEmbedUrl);
             
-                // On parse le JSON pour extraire 'author_name'
+                
                 using (JsonDocument doc = JsonDocument.Parse(json))
                 {
                     JsonElement root = doc.RootElement;
                     this.author = root.GetProperty("author_name").GetString();
                 }
+                
+                //Date with WebScrapping
+                
+                string url = $"https://www.youtube.com/watch?v={this.OnlyIdVideo}";
+                string html = await client.GetStringAsync(url);
+                try
+                {
+                    var match = Regex.Match(html, "itemprop=\"uploadDate\" content=\"(.*?)\"");
+                    if (match.Success)
+                    {
+                        string dateString = match.Groups[1].Value;
+                        if (DateTime.TryParse(dateString, out DateTime date))
+                        {
+                            this.date = date;
+                        }
+                    }
+                
+                }
+                catch (Exception e)
+                {
+                    this.date = DateTime.MinValue;
+                }
+
+
             }
             catch
             {
@@ -190,6 +214,40 @@ public class Ressource
             }
         }
     }
+    
+    
+    //Failed to use yt Dislike Api to get likes ratio
+    /*
+    public async Task<int> GetVideoStats()
+    {
+        //Using Api of the dislike yt extension
+        
+        using (HttpClient client = new HttpClient())
+        {
+            
+            string url = $"https://returnyoutubedislikeapi.com/votes?videoId={OnlyIdVideo}";
+
+            try
+            {
+                Console.WriteLine("Connecting to youtube dislike api...\n");
+                string json = await client.GetStringAsync(url);
+                Console.WriteLine("Parsing...\n");
+                using (JsonDocument doc = JsonDocument.Parse(json))
+                {
+                    int likes = doc.RootElement.GetProperty("likes").GetInt32();
+                    int dislikes = doc.RootElement.GetProperty("dislikes").GetInt32();
+                    Console.WriteLine("Likes: " + likes);
+                    return likes / (likes + dislikes) * 100;
+                }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+    }*/
+    
+    
     
 
     public override string ToString()
